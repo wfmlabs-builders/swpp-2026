@@ -79,6 +79,74 @@ const sessions = [
   { id: 'p10', title: 'Seasons of Change: Lessons Learned from Changes in Systems', speaker: 'Panel: Davis, Marcella, Taylor', day: 'Wed', slot: '3:15-4:30', cat: 'people', tags: ['systems', 'change', 'migration', 'panel'], level: 2 },
 ];
 
+// ── Session descriptions (full detail for popups + print) ─────────────────────
+
+const sessionDescs = {
+  f1: 'A comprehensive look at the forecasting process from long-range annual projections to short-term interval forecasts. Learn the methods, math, and best practices behind accurate demand prediction.',
+  f2: 'Understand the core staffing models \u2014 Erlang C, simulation, and their variations \u2014 and how to apply them to calculate base staff requirements for any contact center operation.',
+  f3: 'Explore the inverse relationship between service level and occupancy, and learn how to find the right balance point that meets both customer expectations and budget constraints.',
+  f4: 'From shift definitions to schedule generation strategies, this session covers the decisions that drive effective scheduling and how to align schedules with staffing requirements.',
+  f5: 'Practical strategies for measuring, managing, and improving schedule adherence. Learn how to build an accountability culture without micromanaging your workforce.',
+  f6: 'Real-time management tactics for when the day doesn\u2019t go as planned. Learn the triggers, responses, and escalation paths that keep service levels on target.',
+  f7: 'Which metrics actually matter for WFM success? This session separates the signal from the noise, covering forecast accuracy, schedule efficiency, and the KPIs that drive operational performance.',
+  f8: 'A compelling case for why WFM is the operational backbone of any customer-facing organization. Learn how to position WFM as a strategic function, not just a scheduling tool.',
+  f9: 'Intensive preparation workshop for the SWPP Certified Workforce Planning Professional (CWPP) certification. Covers all exam domains with practice questions and expert guidance.',
+  f10: 'Interactive quiz-style practice session for CWPP certification candidates. Test your knowledge in a fun, competitive format and identify areas for further study.',
+  o1: 'Progressive Insurance shares their journey implementing short-term forecasting and task-based scheduling in back office operations. Real implementation challenges, solutions, and results.',
+  o2: 'Deep dive into the mechanics of task-based scheduling \u2014 how to decompose back office work into schedulable units and forecast demand when traditional call patterns don\u2019t apply.',
+  o3: 'A roadmap for extending WFM principles beyond the contact center. Learn the unique challenges of middle and back office workforce planning and how technology enables the expansion.',
+  o4: 'Panel discussion featuring practitioners who have successfully expanded WFM into back office operations. Hear their strategies, stumbling blocks, and lessons learned.',
+  o5: 'Shrinkage is often the most misunderstood variable in staffing calculations. This session demystifies shrinkage categories, measurement approaches, and strategies for managing it effectively.',
+  o6: 'Interactive workshop where attendees work through real-world intra-day scenarios. Practice the decision-making process for recovering from forecast misses, unexpected absences, and volume spikes.',
+  o7: 'Remote and hybrid work has changed the adherence game. Learn practical tips for maintaining schedule discipline when your agents aren\u2019t in the building.',
+  o8: 'Creative scheduling isn\u2019t just about flexibility \u2014 it\u2019s about finding innovative solutions that satisfy both operational requirements and employee preferences. Hear what\u2019s working.',
+  o9: 'Watch a capacity plan get built from scratch in real time. This live demonstration walks through every step from gathering inputs to delivering a finished plan.',
+  o10: 'YouTube\u2019s team shares their experience deploying third-party schedule optimization tools. Covers vendor evaluation, implementation, and measuring optimization lift.',
+  o11: 'Rapid-fire session where WFM practitioners share their best tips, tricks, and techniques. One idea per minute \u2014 guaranteed to give you something to take home.',
+  o12: 'WFM software vendors share their best-kept secrets and power-user tips. Learn features you didn\u2019t know existed and workflows that maximize your technology investment.',
+  a1: 'Move beyond static capacity plans with scenario modeling. Learn how to build what-if models that test assumptions, quantify risk, and give leadership the confidence to make decisions.',
+  a2: 'You don\u2019t need expensive software to do powerful what-if analysis. The Kosibas show how to leverage your existing spreadsheets for sophisticated scenario planning.',
+  a3: 'Practical capacity planning techniques with a touch of AI. Seven actionable tips that improve planning accuracy and efficiency, from the team behind Real Numbers.',
+  a4: 'U.S. Bank shares how they\u2019ve integrated advanced analytics and BI tools into their capacity planning process. Real enterprise-scale insights on data architecture and visualization.',
+  a5: 'Capacity planning gets complicated when you blend inbound, outbound, and multi-skilled teams. RCI shares their approach to planning across diverse contact types.',
+  a6: 'When your workforce is outsourced, visibility is the first casualty. Google\u2019s team shares how they use WFM analytics to bridge the BPO visibility gap and maintain operational control.',
+  a7: 'Which metrics drive continuous improvement, and how do you share them effectively? Panel discussion on metric selection, visualization, and the feedback loops that create lasting change.',
+  a8: 'A provocative examination of whether traditional WFM metrics actually drive the outcomes we care about. Challenge your assumptions about what to measure and why.',
+  a9: 'Panel discussion on defining and measuring WFM success. Beyond forecast accuracy and adherence \u2014 what does a truly successful WFM function look like?',
+  ai1: 'Google examines where generative AI actually delivers value in WFM \u2014 and where it doesn\u2019t. Cut through the hype with real data on AI effectiveness in workforce operations.',
+  ai2: 'U.S. Bank\u2019s journey from traditional capacity planning to ML-powered forecasting. Covers model selection, training, validation, and the organizational change required to trust the models.',
+  ai3: 'Fabletics shares their pragmatic approach to AI in WFM. Focus on real-time applications that deliver measurable ROI, not science projects that never leave the lab.',
+  ai4: 'Real results from deploying AI co-pilots alongside human agents. Lessons learned on implementation, agent adoption, and the actual returns vs. vendor promises.',
+  ai5: 'Technical deep dive into using Facebook Prophet for WFM forecasting. Barclays shares their hyperparameter tuning approach and how they achieved precision improvements over traditional methods.',
+  ai6: 'How AI transforms WFM from reactive to predictive. Explore the partnership model where AI handles pattern recognition and humans handle judgment calls.',
+  ai7: 'The workforce of the future isn\u2019t all-human or all-AI \u2014 it\u2019s hybrid. Learn how to plan for, staff, and manage a workforce where humans and AI agents work side by side.',
+  ai8: 'Home Depot\u2019s innovative model for developing AI capabilities within WFM teams. A structured apprenticeship approach that builds AI literacy from the ground up.',
+  ai9: 'YouTube reveals how agentic AI is transforming their support operations. Automated planning, dynamic resource allocation, and the architectural decisions that made it possible.',
+  ai10: 'The five assumptions that built modern WFM are breaking. This session reframes variance as signal, introduces multi-dimensional value optimization, and presents a concrete human-AI collaboration framework for next-generation WFM.',
+  s1: 'How do you get executive buy-in for WFM initiatives? Panel of leaders who\u2019ve successfully sold workforce strategies to C-suite audiences share their frameworks and persuasion techniques.',
+  s2: 'WFM doesn\u2019t operate in a vacuum. Walgreens shares how building strategic partnerships between WFM, HR, and Operations creates alignment and amplifies impact.',
+  s3: 'WFM insights are only valuable if stakeholders understand them. Learn communication strategies that translate complex WFM concepts into language that resonates across the organization.',
+  s4: 'The journey from reactive firefighting to strategic operations planning. LanguageLine Solutions shares how they transformed their operations team structure and mindset.',
+  s5: 'Applying the ADKAR change management model to WFM transformations. Humana Military shares how structured change management drives adoption and sustained improvement.',
+  s6: 'When organizations merge, WFM teams collide. Hilton Grand Vacations shares the art of integrating WFM functions \u2014 systems, processes, and people \u2014 into a unified operation.',
+  s7: 'Northwestern Mutual\u2019s approach to building a capacity planning framework that serves multiple stakeholders. How to balance competing demands and deliver plans everyone trusts.',
+  s8: 'Where is WFM headed? Industry thought leaders discuss the trends, technologies, and organizational shifts that will define the next decade of workforce management.',
+  s9: 'Organizational silos are the enemy of effective WFM. Panel discussion on strategies for breaking down barriers between departments and creating true cross-functional collaboration.',
+  s10: 'Two organizations at different stages of WFM maturity share their evolution stories. From building a WFM function from scratch to evolving an established one \u2014 lessons for every stage.',
+  s11: 'Bring your toughest WFM questions to an expert panel. Open Q&A format covering forecasting, scheduling, analytics, technology, and career development.',
+  s12: 'WFM isn\u2019t just about having the right number of people \u2014 it\u2019s about driving performance. Learn how WFM practices directly influence agent productivity and operational outcomes.',
+  p1: 'Change fatigue is real, and disengagement is its symptom. Nate Brown delivers a framework for fearless CX leadership that maintains team energy through constant transformation.',
+  p2: 'Every scheduling decision impacts agent wellbeing. Learn how to identify the WFM \u201cmoments that matter\u201d and make decisions that prevent burnout before it starts.',
+  p3: 'WFM isn\u2019t one-size-fits-all. Ally Financial shares how they\u2019ve humanized their WFM approach and tailored practices to their specific industry context and workforce culture.',
+  p4: 'Gen Z, Millennials, Gen X, and Boomers all in one workforce. Learn how generational differences impact scheduling preferences, communication styles, and WFM strategy.',
+  p5: 'What makes a great WFM leader? Panel of experienced leaders share their philosophies on team development, stakeholder management, and building high-performing WFM organizations.',
+  p6: 'Career pathing in WFM isn\u2019t always obvious. Hear from leaders who\u2019ve navigated diverse career paths and learn strategies for advancing your WFM career.',
+  p7: 'The tension between hitting service targets and investing in employee growth is real. Panel discussion on practical strategies for walking this tightrope successfully.',
+  p8: 'Change is the only constant in WFM. Petsafe\u2019s Jason Hilliard shares a personal and practical perspective on embracing change rather than resisting it.',
+  p9: 'WFM teams often feel like outsiders in their own organizations. A candid talk about building belonging, visibility, and respect for the WFM function.',
+  p10: 'System migrations are among the most disruptive events in WFM. Panel shares lessons from system changes \u2014 what went right, what went wrong, and what they\u2019d do differently.',
+};
+
 const catMeta = {
   foundations: { label: 'Foundations', color: '#52B788', icon: '\u25FC' },
   operational: { label: 'Operational', color: '#4A90D9', icon: '\u25C6' },
@@ -373,7 +441,88 @@ function UserMessage({ children }) {
   );
 }
 
+function SessionDetailModal({ session, onClose }) {
+  const meta = catMeta[session.cat];
+  const desc = sessionDescs[session.id];
+
+  useEffect(() => {
+    const handleKey = (e) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', handleKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', handleKey);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 1000,
+        background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(4px)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20,
+      }}
+    >
+      <div onClick={e => e.stopPropagation()} style={{
+        background: '#13151F', border: `1px solid ${meta.color}44`,
+        borderRadius: 8, maxWidth: 560, width: '100%', maxHeight: '80vh',
+        overflow: 'auto', padding: 32, position: 'relative',
+      }}>
+        <button onClick={onClose} style={{
+          position: 'absolute', top: 16, right: 16, background: 'none', border: 'none',
+          color: '#666', fontSize: 18, cursor: 'pointer', padding: 4, lineHeight: 1,
+        }} aria-label="Close">&times;</button>
+
+        <div style={{ display: 'flex', gap: 8, marginBottom: 16, flexWrap: 'wrap' }}>
+          <span className="mono" style={{
+            fontSize: 10, padding: '3px 10px',
+            background: meta.color + '22', border: `1px solid ${meta.color}44`,
+            borderRadius: 2, color: meta.color, letterSpacing: '0.1em',
+          }}>
+            {meta.icon} {meta.label}
+          </span>
+          <span className="mono" style={{
+            fontSize: 10, padding: '3px 10px',
+            background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
+            borderRadius: 2, color: '#888', letterSpacing: '0.1em',
+          }}>
+            L{session.level} &middot; {levelLabels[session.level]}
+          </span>
+        </div>
+
+        <h2 style={{
+          fontSize: 20, fontWeight: 'normal',
+          color: session.highlight ? '#C9A227' : '#F0EBE0',
+          lineHeight: 1.3, marginBottom: 16, paddingRight: 24,
+        }}>{session.title}</h2>
+
+        <div style={{ display: 'flex', gap: 16, alignItems: 'center', marginBottom: 20, flexWrap: 'wrap' }}>
+          <span className="mono" style={{ fontSize: 12, color: meta.color }}>
+            {session.speaker}
+          </span>
+          <span className="mono" style={{ fontSize: 11, color: '#666' }}>
+            {dayLabels[session.day]} &middot; {session.slot}
+          </span>
+        </div>
+
+        <div style={{ height: 1, background: 'var(--border)', marginBottom: 20 }} />
+
+        {desc ? (
+          <p style={{ fontSize: 14, color: '#BBB', lineHeight: 1.7 }}>{desc}</p>
+        ) : (
+          <p style={{ fontSize: 14, color: '#666', lineHeight: 1.7, fontStyle: 'italic' }}>
+            No additional description available.
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function ScheduleView({ picked, onRemove, onAddMore }) {
+  const [detailSession, setDetailSession] = useState(null);
+
   const grouped = {};
   dayOrder.forEach(d => { grouped[d] = []; });
   picked.forEach(s => { if (grouped[s.day]) grouped[s.day].push(s); });
@@ -383,7 +532,23 @@ function ScheduleView({ picked, onRemove, onAddMore }) {
 
   return (
     <div>
-      <div style={{
+      {/* Detail modal */}
+      {detailSession && (
+        <SessionDetailModal session={detailSession} onClose={() => setDetailSession(null)} />
+      )}
+
+      {/* Print-only header */}
+      <div className="print-only" style={{ marginBottom: 24 }}>
+        <h1 style={{ fontSize: 22, fontWeight: 'bold', margin: '0 0 4px' }}>
+          SWPP 2026 &mdash; Your Custom Agenda
+        </h1>
+        <div style={{ fontSize: 11, color: '#666' }}>
+          April 27&ndash;29, 2026 &middot; Omni Nashville Hotel &middot; Built with WFM Labs Agenda Builder
+        </div>
+        <div style={{ height: 2, background: '#333', marginTop: 12 }} />
+      </div>
+
+      <div className="no-print" style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         marginBottom: 24, flexWrap: 'wrap', gap: 12,
       }}>
@@ -392,7 +557,7 @@ function ScheduleView({ picked, onRemove, onAddMore }) {
             Your Custom Agenda
           </h2>
           <div className="mono" style={{ fontSize: 11, color: '#666' }}>
-            {picked.length} sessions selected &middot; click &times; to remove
+            {picked.length} sessions selected &middot; click a session for details
           </div>
         </div>
         <div style={{ display: 'flex', gap: 10 }}>
@@ -404,7 +569,7 @@ function ScheduleView({ picked, onRemove, onAddMore }) {
             className="ghost-btn ghost-btn--secondary"
             style={{ fontSize: 10, padding: '6px 14px' }}
           >
-            Print
+            Print / PDF
           </button>
         </div>
       </div>
@@ -413,8 +578,8 @@ function ScheduleView({ picked, onRemove, onAddMore }) {
         const daySessions = grouped[day];
         if (daySessions.length === 0) return null;
         return (
-          <div key={day} style={{ marginBottom: 32 }}>
-            <div className="mono" style={{
+          <div key={day} style={{ marginBottom: 32 }} className="print-day-group">
+            <div className="mono print-day-header" style={{
               fontSize: 11, letterSpacing: '0.15em', color: '#C9A227',
               textTransform: 'uppercase', marginBottom: 12,
               paddingBottom: 8, borderBottom: '1px solid rgba(255,255,255,0.06)',
@@ -424,28 +589,37 @@ function ScheduleView({ picked, onRemove, onAddMore }) {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {daySessions.map(s => {
                 const meta = catMeta[s.cat];
+                const desc = sessionDescs[s.id];
                 return (
-                  <div key={s.id} style={{
-                    display: 'flex', gap: 12, alignItems: 'flex-start',
-                    padding: '12px 14px', borderRadius: 4,
-                    background: s.highlight ? 'rgba(201,162,39,0.08)' : 'rgba(255,255,255,0.02)',
-                    border: `1px solid ${s.highlight ? 'rgba(201,162,39,0.2)' : 'rgba(255,255,255,0.06)'}`,
-                  }}>
-                    <div className="mono" style={{
+                  <div
+                    key={s.id}
+                    className="print-session-card"
+                    onClick={() => setDetailSession(s)}
+                    style={{
+                      display: 'flex', gap: 12, alignItems: 'flex-start',
+                      padding: '12px 14px', borderRadius: 4, cursor: 'pointer',
+                      background: s.highlight ? 'rgba(201,162,39,0.08)' : 'rgba(255,255,255,0.02)',
+                      border: `1px solid ${s.highlight ? 'rgba(201,162,39,0.2)' : 'rgba(255,255,255,0.06)'}`,
+                      transition: 'border-color 0.15s',
+                    }}
+                    onMouseOver={e => { e.currentTarget.style.borderColor = meta.color + '55'; }}
+                    onMouseOut={e => { e.currentTarget.style.borderColor = s.highlight ? 'rgba(201,162,39,0.2)' : 'rgba(255,255,255,0.06)'; }}
+                  >
+                    <div className="mono print-slot" style={{
                       fontSize: 11, color: '#888', flexShrink: 0, width: 90, marginTop: 2,
                     }}>
                       {s.slot}
                     </div>
                     <div style={{ flex: 1 }}>
-                      <div style={{
+                      <div className="print-title" style={{
                         fontSize: 13, color: s.highlight ? '#C9A227' : '#F0EBE0',
                         fontWeight: s.highlight ? 'bold' : 'normal', lineHeight: 1.4, marginBottom: 4,
                       }}>
                         {s.title}
                       </div>
                       <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-                        <span className="mono" style={{ fontSize: 10, color: '#666' }}>{s.speaker}</span>
-                        <span style={{
+                        <span className="mono print-speaker" style={{ fontSize: 10, color: '#666' }}>{s.speaker}</span>
+                        <span className="print-cat-badge" style={{
                           fontSize: 9, padding: '1px 6px', borderRadius: 2,
                           background: meta.color + '22', border: `1px solid ${meta.color}33`,
                           color: meta.color, fontFamily: "'JetBrains Mono', monospace",
@@ -453,9 +627,15 @@ function ScheduleView({ picked, onRemove, onAddMore }) {
                           {meta.icon} {meta.label}
                         </span>
                       </div>
+                      {desc && (
+                        <div className="print-desc">
+                          <p style={{ fontSize: 11, color: '#555', lineHeight: 1.5, marginTop: 6, marginBottom: 0 }}>{desc}</p>
+                        </div>
+                      )}
                     </div>
                     <button
-                      onClick={() => onRemove(s.id)}
+                      onClick={(e) => { e.stopPropagation(); onRemove(s.id); }}
+                      className="no-print"
                       style={{
                         background: 'none', border: 'none', color: '#555', cursor: 'pointer',
                         fontSize: 14, padding: '2px 6px', flexShrink: 0,
@@ -737,7 +917,7 @@ export default function Planner() {
         <div className="container" style={{ maxWidth: 700 }}>
 
           {phase !== 'browse' && (
-            <div ref={scrollRef} style={{ marginBottom: 24 }}>
+            <div ref={scrollRef} className="no-print" style={{ marginBottom: 24 }}>
               {/* Conversation history */}
               {conversation.map((msg, i) => (
                 msg.type === 'agent'
@@ -857,10 +1037,61 @@ export default function Planner() {
       </section>
 
       <style>{`
+        @media screen {
+          .print-only { display: none !important; }
+          .print-desc { display: none !important; }
+        }
         @media print {
-          nav, footer, .ghost-btn, button { display: none !important; }
+          /* Hide non-content elements */
+          nav, footer, .no-print, button { display: none !important; }
           section:first-of-type { display: none !important; }
-          div[style*="conversation"] { display: none !important; }
+
+          /* White background reset */
+          body, #root, main, section, div {
+            background: white !important;
+            background-image: none !important;
+          }
+
+          /* Show print-only elements */
+          .print-only { display: block !important; }
+          .print-desc { display: block !important; }
+
+          /* Schedule cards */
+          .print-session-card {
+            background: white !important;
+            border: 1px solid #ddd !important;
+            cursor: default !important;
+            break-inside: avoid;
+            page-break-inside: avoid;
+          }
+
+          /* Typography overrides for print */
+          .print-title { color: #111 !important; font-weight: 600 !important; }
+          .print-speaker { color: #444 !important; }
+          .print-slot { color: #333 !important; font-weight: 500 !important; }
+          .print-cat-badge {
+            background: #f0f0f0 !important;
+            border: 1px solid #bbb !important;
+            color: #555 !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+          .print-desc p { color: #444 !important; }
+
+          /* Day headers */
+          .print-day-header {
+            color: #111 !important;
+            border-bottom: 2px solid #222 !important;
+            font-weight: bold !important;
+          }
+
+          /* Print-only header styling */
+          .print-only h1 { color: #111 !important; }
+          .print-only div { color: #666 !important; }
+          .print-only div:last-child { background: #222 !important; }
+
+          /* Page setup */
+          .print-day-group { break-inside: avoid-column; }
         }
       `}</style>
     </div>
