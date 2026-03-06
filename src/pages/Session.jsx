@@ -143,10 +143,10 @@ export default function Session() {
           </p>
 
           <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-            <a href="https://wfmlabs.org" target="_blank" rel="noopener noreferrer" className="ghost-btn" style={{ fontSize: 11 }}>
+            <a href="https://www.amazon.com/Adaptive-Building-Workforce-Systems-Unpredictable/dp/B0FZWDPH2M" target="_blank" rel="noopener noreferrer" className="ghost-btn" style={{ fontSize: 11 }}>
               Get the Book &rarr;
             </a>
-            <a href="https://www.linkedin.com/newsletters/contact-center-compass/" target="_blank" rel="noopener noreferrer" className="ghost-btn ghost-btn--secondary" style={{ fontSize: 11 }}>
+            <a href="https://www.linkedin.com/newsletters/contact-center-compass-7288583905652207616/" target="_blank" rel="noopener noreferrer" className="ghost-btn ghost-btn--secondary" style={{ fontSize: 11 }}>
               Read the Newsletter &rarr;
             </a>
           </div>

@@ -20,51 +20,25 @@ export default function Book() {
             alignItems: 'start',
           }}>
             {/* Book Cover */}
-            <div style={{
-              aspectRatio: '3/4',
-              background: 'linear-gradient(135deg, #13151F 0%, #1a1c28 50%, #13151F 100%)',
-              border: '1px solid rgba(201, 162, 39, 0.2)',
-              borderRadius: 4,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              padding: '40px 32px',
-              textAlign: 'center',
-            }}>
-              <div className="mono" style={{
-                fontSize: 9,
-                letterSpacing: '0.3em',
-                color: '#888',
-                textTransform: 'uppercase',
-                marginBottom: 24,
-              }}>
-                Ted Lango
-              </div>
-              <h2 style={{
-                fontSize: 32,
-                fontWeight: 'normal',
-                color: '#C9A227',
-                lineHeight: 1.2,
-                marginBottom: 16,
-              }}>
-                Adaptive
-              </h2>
-              <div style={{
-                width: 40,
-                height: 1,
-                background: 'rgba(201,162,39,0.3)',
-                marginBottom: 16,
-              }} />
-              <p style={{
-                fontSize: 13,
-                color: '#999',
-                lineHeight: 1.5,
-                maxWidth: 200,
-              }}>
-                Building Workforce Systems for an (Unpredictable) Future
-              </p>
-            </div>
+            <a
+              href="https://www.amazon.com/Adaptive-Building-Workforce-Systems-Unpredictable/dp/B0FZWDPH2M"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ display: 'block' }}
+            >
+              <img
+                src="/adaptive-cover.jpg"
+                alt="Adaptive: Building Workforce Systems for an (Unpredictable) Future by Ted Lango"
+                style={{
+                  width: '100%',
+                  borderRadius: 4,
+                  border: '1px solid rgba(201, 162, 39, 0.2)',
+                  transition: 'border-color 0.2s',
+                }}
+                onMouseOver={e => e.currentTarget.style.borderColor = 'rgba(201, 162, 39, 0.5)'}
+                onMouseOut={e => e.currentTarget.style.borderColor = 'rgba(201, 162, 39, 0.2)'}
+              />
+            </a>
 
             {/* Book Info */}
             <div>
@@ -140,7 +114,7 @@ export default function Book() {
               </div>
 
               <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-                <a href="https://wfmlabs.org" target="_blank" rel="noopener noreferrer" className="ghost-btn">
+                <a href="https://www.amazon.com/Adaptive-Building-Workforce-Systems-Unpredictable/dp/B0FZWDPH2M" target="_blank" rel="noopener noreferrer" className="ghost-btn">
                   Get the Book &rarr;
                 </a>
                 <Link to="/session/adaptive" className="ghost-btn ghost-btn--secondary">

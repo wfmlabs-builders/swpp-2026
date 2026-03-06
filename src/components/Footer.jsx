@@ -34,7 +34,7 @@ export default function Footer() {
             <a href="https://www.linkedin.com/in/tedlango/" target="_blank" rel="noopener noreferrer" style={{ color: '#666', fontSize: 14, textDecoration: 'none' }} title="LinkedIn">
               in
             </a>
-            <a href="https://www.linkedin.com/newsletters/contact-center-compass/" target="_blank" rel="noopener noreferrer" style={{ color: '#666', fontSize: 14, textDecoration: 'none' }} title="Newsletter">
+            <a href="https://www.linkedin.com/newsletters/contact-center-compass-7288583905652207616/" target="_blank" rel="noopener noreferrer" style={{ color: '#666', fontSize: 14, textDecoration: 'none' }} title="Newsletter">
               &#9993;
             </a>
           </div>

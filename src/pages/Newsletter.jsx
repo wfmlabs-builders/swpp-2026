@@ -66,7 +66,7 @@ export default function Newsletter() {
               New issues monthly. Practical WFM strategy, not vendor marketing.
             </p>
             <a
-              href="https://www.linkedin.com/newsletters/contact-center-compass/"
+              href="https://www.linkedin.com/newsletters/contact-center-compass-7288583905652207616/"
               target="_blank"
               rel="noopener noreferrer"
               className="ghost-btn"
