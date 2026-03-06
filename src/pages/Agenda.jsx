@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import sessionDescs from '../data/descriptions';
+import sessionSlots from '../data/slots';
 
 const categories = [
   {
@@ -137,6 +138,17 @@ const categories = [
 const levelLabels = { 1: 'Traditional', 2: 'Applied', 3: 'Advanced', 4: 'Emerging' };
 const days = ['All', 'Mon', 'Tue', 'Wed'];
 const dayLabels = { Mon: 'Monday, April 27', Tue: 'Tuesday, April 28', Wed: 'Wednesday, April 29' };
+const dayOrder = { Mon: 0, Tue: 1, Wed: 2 };
+const slotOrder = ['9:15-10:30', '9:15-12:00', '10:45-12:00', '1:30-2:45', '3:15-4:30'];
+
+function sortSessions(sessions) {
+  return [...sessions].sort((a, b) => {
+    const da = dayOrder[a.day] ?? 9, db = dayOrder[b.day] ?? 9;
+    if (da !== db) return da - db;
+    const sa = slotOrder.indexOf(sessionSlots[a.id] || ''), sb = slotOrder.indexOf(sessionSlots[b.id] || '');
+    return sa - sb;
+  });
+}
 
 function SessionModal({ session, category, onClose }) {
   useEffect(() => {
@@ -242,13 +254,14 @@ function SessionModal({ session, category, onClose }) {
           {session.title}
         </h2>
 
-        {/* Speaker + Day */}
+        {/* Speaker + Day + Time */}
         <div style={{ display: 'flex', gap: 16, alignItems: 'center', marginBottom: 24, flexWrap: 'wrap' }}>
           <span className="mono" style={{ fontSize: 12, color: category.accent }}>
             {session.speaker}
           </span>
           <span className="mono" style={{ fontSize: 11, color: '#666' }}>
             {dayLabels[session.day] || session.day}
+            {session.id && sessionSlots[session.id] ? ` \u00b7 ${sessionSlots[session.id]}` : ''}
           </span>
         </div>
 
@@ -462,7 +475,7 @@ export default function Agenda() {
 
               {/* Sessions */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                {filteredSessions.map((s, i) => (
+                {sortSessions(filteredSessions).map((s, i) => (
                   <div
                     key={i}
                     onClick={e => {
@@ -515,8 +528,9 @@ export default function Agenda() {
                         color: '#555',
                         flexShrink: 0,
                         marginTop: 2,
+                        whiteSpace: 'nowrap',
                       }}>
-                        {s.day}
+                        {s.day} {sessionSlots[s.id] || ''}
                       </span>
                     </div>
                     <div style={{
