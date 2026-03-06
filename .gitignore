@@ -1,4 +1,4 @@
-node_modules\ndist\n.DS_Store
-
-# Local Netlify folder
+node_modules
+dist
+.DS_Store
 .netlify
