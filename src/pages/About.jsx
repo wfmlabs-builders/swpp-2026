@@ -1,8 +1,8 @@
 const credentials = [
-  '20+ Years WFM',
+  '20+ Years Transformation Leadership',
+  '85+ Contact Centers · 400M+ Interactions',
+  '$50M+ Savings · 300% ROI',
   'Author: Adaptive',
-  '801 Newsletter Subscribers',
-  'SWPP Speaker 2026',
 ];
 
 const services = [
@@ -43,28 +43,36 @@ export default function About() {
             lineHeight: 1.3,
             marginBottom: 32,
           }}>
-            Contact Center Strategist. Author. WFM Practitioner.
+            Workforce Transformation Strategist. Author. Builder.
           </h1>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 18, color: '#CCC', fontSize: 15, lineHeight: 1.7 }}>
             <p>
-              Ted Lango has spent 20+ years in workforce management and contact center
-              operations, from front-line analyst to strategic advisor. His career spans
-              enterprise WFM transformation, capacity planning modernization, and the
-              emerging intersection of AI and workforce design.
+              Ted Lango brings 20+ years of transformation leadership across workforce
+              management, contact center operations, and AI infrastructure design. His
+              track record includes managing operations across 85+ contact centers handling
+              400M+ interactions annually, capturing $50M+ in documented savings with
+              300% ROI delivery for Fortune 100 organizations, technology providers, and
+              strategic consulting firms.
             </p>
             <p>
               He is the author of <em>Adaptive: Building Workforce Systems for an
-              (Unpredictable) Future</em>, a framework that challenges the five assumptions
-              governing traditional WFM. The book draws on operations research, probabilistic
-              modeling, and real-world implementation experience.
+              (Unpredictable) Future</em> &mdash; a framework that challenges the assumptions
+              governing traditional WFM. The book argues that organizations building adaptive
+              systems designed for continuous rebalancing will outperform those optimizing
+              for current conditions, and draws on operations research, multi-objective
+              optimization, and real-world implementation experience.
             </p>
             <p>
-              As founder of Kyodo Solutions, Ted consults with contact center leaders on
-              next-generation workforce strategy. He publishes{' '}
-              <em>Contact Center Compass</em>, a LinkedIn newsletter with 801 subscribers
-              covering WFM intelligence for operations leaders navigating the AI era.
-              Based in Miami.
+              Ted leads{' '}
+              <a href="https://wfmlabs.com" target="_blank" rel="noopener noreferrer" style={{ color: '#C9A227' }}>
+                WFM Labs
+              </a>, a builder community of 1,000+ members developing open-source workforce
+              management tools powered by agentic AI. He publishes{' '}
+              <a href="https://www.linkedin.com/newsletters/contact-center-compass-7288583905652207616/" target="_blank" rel="noopener noreferrer" style={{ color: '#C9A227' }}>
+                Contact Center Compass
+              </a>, a LinkedIn newsletter covering WFM intelligence for operations leaders
+              navigating the AI era. Based in Fort Lauderdale.
             </p>
           </div>
 
@@ -120,9 +128,10 @@ export default function About() {
           </h2>
 
           <p style={{ fontSize: 15, color: '#999', lineHeight: 1.7, marginBottom: 40 }}>
-            Boutique consulting focused on WFM transformation, capacity planning
-            modernization, and human-AI workforce design. We help contact center
-            leaders move from efficiency-first operations to value-optimized systems.
+            Boutique consulting focused on the intersection of workforce management,
+            operations research, and AI implementation. We help contact center leaders
+            design systems that address competing stakeholder needs &mdash; customers,
+            employees, and shareholders &mdash; simultaneously, not sequentially.
           </p>
 
           <div style={{
