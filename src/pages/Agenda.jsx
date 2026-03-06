@@ -194,7 +194,7 @@ function SessionModal({ session, category, onClose }) {
           }}
           aria-label="Close"
         >
-          \u2715
+          &times;
         </button>
 
         {/* Category + Level badges */}

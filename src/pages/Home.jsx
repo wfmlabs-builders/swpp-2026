@@ -82,6 +82,7 @@ export default function Home() {
 
           <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
             <Link to="/agenda" className="ghost-btn">View Full Agenda</Link>
+            <Link to="/session/adaptive" className="ghost-btn ghost-btn--secondary">Ted's Session</Link>
             <a
               href="https://swpp.org/annual-conference/"
               target="_blank"
