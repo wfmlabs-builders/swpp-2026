@@ -145,13 +145,111 @@ const questions = [
       { label: 'Bring back a strategic plan for my team', value: 'strategic' },
     ],
   },
+  {
+    id: 'freetext',
+    text: "Last one \u2014 tell me in your own words what you're hoping to get out of SWPP this year. Challenges you're facing, specific topics, anything on your mind. Or just hit Skip.",
+    freetext: true,
+  },
 ];
+
+// ── Free-text keyword extraction ──────────────────────────────────────────────
+
+const keywordMap = [
+  // Pain points → tags + categories
+  { patterns: ['understaffed', 'understaffing', 'not enough people', 'short staffed', 'staffing gap', 'hiring'], tags: ['staffing', 'cost', 'service-level'], cats: ['foundations', 'operational'] },
+  { patterns: ['overstaffed', 'overstaffing', 'too many', 'idle', 'occupancy low'], tags: ['staffing', 'cost', 'service-level'], cats: ['foundations', 'analytics'] },
+  { patterns: ['forecast', 'forecasting', 'prediction', 'accuracy', 'inaccurate', 'volume spike'], tags: ['forecasting', 'modeling', 'scenario'], cats: ['foundations', 'analytics'] },
+  { patterns: ['schedule', 'scheduling', 'shift', 'roster', 'flexible', 'flexibility'], tags: ['scheduling', 'flexibility', 'optimization'], cats: ['foundations', 'operational'] },
+  { patterns: ['adherence', 'compliance', 'off phone', 'aux', 'not following'], tags: ['adherence', 'management', 'culture'], cats: ['foundations', 'operational'] },
+  { patterns: ['shrinkage', 'absenteeism', 'attrition', 'turnover', 'retention'], tags: ['shrinkage', 'burnout', 'wellbeing', 'culture'], cats: ['operational', 'people'] },
+  { patterns: ['capacity plan', 'long range', 'long-range', 'annual plan', 'headcount', 'budget'], tags: ['capacity-planning', 'scenario', 'framework'], cats: ['analytics', 'strategy'] },
+  { patterns: ['ai', 'artificial intelligence', 'machine learning', 'ml', 'automation', 'automate', 'bot', 'chatbot', 'genai', 'generative', 'copilot', 'co-pilot', 'llm', 'gpt'], tags: ['ai', 'ml', 'genai', 'automation', 'agentic', 'human-ai'], cats: ['aiml'] },
+  { patterns: ['back office', 'back-office', 'backoffice', 'middle office', 'task', 'non-phone', 'email', 'chat'], tags: ['back-office', 'expansion', 'multi-channel'], cats: ['operational'] },
+  { patterns: ['metric', 'kpi', 'measure', 'dashboard', 'report', 'bi', 'analytics', 'data'], tags: ['metrics', 'kpi', 'analytics', 'bi', 'measurement'], cats: ['analytics'] },
+  { patterns: ['leader', 'leadership', 'executive', 'c-suite', 'vp', 'director', 'influence', 'sell', 'buy-in', 'stakeholder'], tags: ['leadership', 'executive', 'communication', 'stakeholder'], cats: ['strategy'] },
+  { patterns: ['change management', 'transformation', 'reorgan', 'merge', 'integration', 'adkar'], tags: ['change-management', 'integration', 'merger'], cats: ['strategy'] },
+  { patterns: ['burnout', 'wellbeing', 'wellness', 'engagement', 'morale', 'satisfaction', 'happy', 'stress'], tags: ['burnout', 'wellbeing', 'engagement', 'culture'], cats: ['people'] },
+  { patterns: ['career', 'promotion', 'grow', 'growth', 'next role', 'advance', 'certification', 'cwpp'], tags: ['career', 'development', 'certification'], cats: ['people', 'foundations'] },
+  { patterns: ['remote', 'hybrid', 'virtual', 'work from home', 'wfh', 'distributed'], tags: ['remote', 'hybrid', 'flexibility'], cats: ['operational', 'people'] },
+  { patterns: ['bpo', 'outsource', 'vendor', 'offshore', 'nearshore', 'third party', '3rd party'], tags: ['bpo', 'outsourcing', 'vendor'], cats: ['analytics', 'operational'] },
+  { patterns: ['erlang', 'staffing model', 'simulation', 'service level', 'asa', 'abandon'], tags: ['erlang', 'staffing', 'service-level', 'modeling'], cats: ['foundations', 'analytics'] },
+  { patterns: ['python', 'prophet', 'code', 'programming', 'technical', 'script'], tags: ['python', 'technical', 'ml'], cats: ['aiml'] },
+  { patterns: ['real-time', 'real time', 'intraday', 'intra-day', 'same day'], tags: ['real-time', 'intraday'], cats: ['foundations', 'operational'] },
+  { patterns: ['roi', 'cost', 'save', 'saving', 'efficiency', 'productivity', 'optimize'], tags: ['roi', 'cost', 'performance', 'productivity', 'optimization'], cats: ['analytics', 'strategy'] },
+  { patterns: ['silo', 'cross-functional', 'collaboration', 'alignment', 'partnership', 'hr'], tags: ['silos', 'cross-functional', 'partnership', 'hr'], cats: ['strategy'] },
+  { patterns: ['multi-gen', 'generation', 'gen z', 'millennial', 'boomer'], tags: ['generational', 'culture', 'workforce'], cats: ['people'] },
+  { patterns: ['future', 'trend', 'next gen', 'emerging', 'innovation', 'disrupt', 'evolve'], tags: ['future', 'trends', 'evolution'], cats: ['aiml', 'strategy'] },
+  { patterns: ['variance', 'unpredictable', 'uncertainty', 'adaptive', 'volatile'], tags: ['variance', 'value', 'framework', 'human-ai'], cats: ['aiml'] },
+  // Speaker names → boost their sessions
+  { patterns: ['penny reynolds'], tags: ['fundamentals'], cats: ['foundations'], speakerMatch: 'Penny Reynolds' },
+  { patterns: ['kosiba', 'real numbers'], tags: ['capacity-planning', 'scenario'], cats: ['analytics'], speakerMatch: 'Kosiba' },
+  { patterns: ['juanita coley'], tags: ['fundamentals', 'human-ai'], cats: ['foundations', 'aiml'], speakerMatch: 'Coley' },
+  { patterns: ['nate brown'], tags: ['cx', 'engagement'], cats: ['people'], speakerMatch: 'Brown' },
+  { patterns: ['ted lango', 'adaptive', 'kyodo'], tags: ['variance', 'value', 'human-ai', 'framework'], cats: ['aiml'], speakerMatch: 'Ted Lango' },
+  // Company names → boost their sessions
+  { patterns: ['google', 'youtube'], tags: ['ai', 'agentic', 'bpo'], cats: ['aiml', 'analytics'], speakerMatch: 'Google' },
+  { patterns: ['u.s. bank', 'us bank'], tags: ['ml', 'analytics', 'capacity-planning', 'enterprise'], cats: ['aiml', 'analytics'], speakerMatch: 'U.S. Bank' },
+  { patterns: ['progressive'], tags: ['back-office', 'scheduling'], cats: ['operational'], speakerMatch: 'Progressive' },
+  { patterns: ['home depot'], tags: ['ai', 'training'], cats: ['aiml'], speakerMatch: 'Home Depot' },
+  { patterns: ['barclays'], tags: ['ml', 'forecasting', 'python'], cats: ['aiml'], speakerMatch: 'Barclays' },
+  { patterns: ['fabletics'], tags: ['ai', 'roi', 'scenario'], cats: ['aiml', 'analytics'], speakerMatch: 'Fabletics' },
+];
+
+function extractSignals(text) {
+  const lower = text.toLowerCase();
+  const signals = { tags: new Set(), cats: new Set(), speakerMatches: [] };
+
+  for (const rule of keywordMap) {
+    for (const pattern of rule.patterns) {
+      if (lower.includes(pattern)) {
+        rule.tags.forEach(t => signals.tags.add(t));
+        rule.cats.forEach(c => signals.cats.add(c));
+        if (rule.speakerMatch) signals.speakerMatches.push(rule.speakerMatch);
+        break;
+      }
+    }
+  }
+
+  return {
+    tags: [...signals.tags],
+    cats: [...signals.cats],
+    speakerMatches: signals.speakerMatches,
+  };
+}
+
+function describeSignals(signals) {
+  const parts = [];
+  if (signals.tags.length > 0) {
+    const topTags = signals.tags.slice(0, 5);
+    parts.push(`detected themes: ${topTags.join(', ')}`);
+  }
+  if (signals.speakerMatches.length > 0) {
+    parts.push(`noted speaker interest: ${signals.speakerMatches.join(', ')}`);
+  }
+  if (parts.length === 0) return null;
+  return parts.join(' \u2014 ');
+}
 
 // ── Scoring engine ────────────────────────────────────────────────────────────
 
-function scoreSession(s, answers) {
+function scoreSession(s, answers, signals) {
   let score = 0;
   const { role, experience, interests, goal } = answers;
+
+  // Free-text signal boosts (applied first, stacks with structured answers)
+  if (signals) {
+    // Tag matches from free text
+    const tagMatches = s.tags.filter(t => signals.tags.includes(t)).length;
+    score += tagMatches * 3;
+
+    // Category boost from free text
+    if (signals.cats.includes(s.cat)) score += 2;
+
+    // Speaker/company name matches
+    for (const match of signals.speakerMatches) {
+      if (s.speaker.toLowerCase().includes(match.toLowerCase())) score += 5;
+    }
+  }
 
   // Role-based category affinity
   const roleCatBoost = {
@@ -214,8 +312,8 @@ function scoreSession(s, answers) {
   return score;
 }
 
-function buildRecommendation(answers) {
-  const scored = sessions.map(s => ({ ...s, score: scoreSession(s, answers) }))
+function buildRecommendation(answers, signals) {
+  const scored = sessions.map(s => ({ ...s, score: scoreSession(s, answers, signals) }))
     .sort((a, b) => b.score - a.score);
 
   // Pick top sessions avoiding time conflicts
@@ -477,6 +575,8 @@ export default function Planner() {
   const [picked, setPicked] = useState([]);
   const [phase, setPhase] = useState('chat'); // chat | schedule | browse
   const [typing, setTyping] = useState(false);
+  const [freetextValue, setFreetextValue] = useState('');
+  const [signals, setSignals] = useState(null);
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -503,15 +603,14 @@ export default function Planner() {
     const newAnswers = { ...answers, [q.id]: value };
     setAnswers(newAnswers);
 
-    if (step + 1 < questions.length) {
+    const nextStep = step + 1;
+    if (nextStep < questions.length) {
       setTyping(true);
       setTimeout(() => {
         setTyping(false);
-        setStep(step + 1);
-        addToConvo({ type: 'agent', text: questions[step + 1].text });
+        setStep(nextStep);
+        addToConvo({ type: 'agent', text: questions[nextStep].text });
       }, 600);
-    } else {
-      generateSchedule(newAnswers);
     }
   };
 
@@ -523,29 +622,57 @@ export default function Planner() {
     setAnswers(newAnswers);
     setMultiSelect([]);
 
-    if (step + 1 < questions.length) {
+    const nextStep = step + 1;
+    if (nextStep < questions.length) {
       setTyping(true);
       setTimeout(() => {
         setTyping(false);
-        setStep(step + 1);
-        addToConvo({ type: 'agent', text: questions[step + 1].text });
+        setStep(nextStep);
+        addToConvo({ type: 'agent', text: questions[nextStep].text });
       }, 600);
-    } else {
-      generateSchedule(newAnswers);
     }
   };
 
-  const generateSchedule = (finalAnswers) => {
+  const handleFreetextSubmit = (text) => {
+    const trimmed = text.trim();
+    if (trimmed) {
+      addToConvo({ type: 'user', text: trimmed });
+      const extracted = extractSignals(trimmed);
+      setSignals(extracted);
+      generateSchedule(answers, extracted);
+    } else {
+      handleFreetextSkip();
+    }
+  };
+
+  const handleFreetextSkip = () => {
+    addToConvo({ type: 'user', text: '(skipped)' });
+    generateSchedule(answers, null);
+  };
+
+  const generateSchedule = (finalAnswers, extractedSignals) => {
     setTyping(true);
     setTimeout(() => {
       setTyping(false);
-      const recommended = buildRecommendation(finalAnswers);
+
+      // Show what the agent detected from free text
+      if (extractedSignals && extractedSignals.tags.length > 0) {
+        const desc = describeSignals(extractedSignals);
+        if (desc) {
+          addToConvo({ type: 'agent', text: `Signal analysis: ${desc}. Weighting your recommendations accordingly.` });
+        }
+      }
+
+      const recommended = buildRecommendation(finalAnswers, extractedSignals);
       setPicked(recommended);
-      addToConvo({
-        type: 'agent',
-        text: `I've built a personalized ${recommended.length}-session agenda based on your profile. You can remove sessions, add new ones, or print your schedule.`,
-      });
-      setPhase('schedule');
+
+      setTimeout(() => {
+        addToConvo({
+          type: 'agent',
+          text: `I've built a personalized ${recommended.length}-session agenda based on your profile${extractedSignals?.tags.length > 0 ? ' and the context you shared' : ''}. You can remove sessions, add new ones, or print your schedule.`,
+        });
+        setPhase('schedule');
+      }, extractedSignals?.tags.length > 0 ? 800 : 0);
     }, 1200);
   };
 
@@ -557,6 +684,8 @@ export default function Planner() {
     setPicked([]);
     setPhase('chat');
     setTyping(false);
+    setFreetextValue('');
+    setSignals(null);
   };
 
   // Initialize first question
@@ -598,7 +727,7 @@ export default function Planner() {
             </div>
           </div>
           <p style={{ fontSize: 14, color: '#999', lineHeight: 1.5 }}>
-            Answer four quick questions and I'll build a conflict-free, personalized conference schedule tailored to your role and interests.
+            Answer a few quick questions, tell me what's on your mind, and I'll build a conflict-free, personalized conference schedule tailored to you.
           </p>
         </div>
       </section>
@@ -620,7 +749,7 @@ export default function Planner() {
           )}
 
           {/* Question options (only during chat phase) */}
-          {phase === 'chat' && !typing && currentQ && (
+          {phase === 'chat' && !typing && currentQ && !currentQ.freetext && (
             <div style={{ marginLeft: 40, marginBottom: 24 }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                 {currentQ.options.map(opt => {
@@ -651,6 +780,51 @@ export default function Planner() {
                   Continue with {multiSelect.length} selected &rarr;
                 </button>
               )}
+            </div>
+          )}
+
+          {/* Free text input */}
+          {phase === 'chat' && !typing && currentQ && currentQ.freetext && (
+            <div style={{ marginLeft: 40, marginBottom: 24 }}>
+              <textarea
+                value={freetextValue}
+                onChange={e => setFreetextValue(e.target.value)}
+                placeholder="e.g. &quot;We're struggling with forecast accuracy on our chat channel and I want to understand how AI can help with capacity planning. Also interested in anything from Google or YouTube...&quot;"
+                style={{
+                  width: '100%', minHeight: 100, padding: '12px 14px', borderRadius: 4,
+                  background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.12)',
+                  color: '#F0EBE0', fontSize: 13, lineHeight: 1.6, resize: 'vertical',
+                  fontFamily: 'Georgia, serif', outline: 'none',
+                }}
+                onFocus={e => e.target.style.borderColor = 'rgba(201,162,39,0.3)'}
+                onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.12)'}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleFreetextSubmit(freetextValue);
+                  }
+                }}
+              />
+              <div style={{ display: 'flex', gap: 10, marginTop: 10 }}>
+                <button
+                  onClick={() => handleFreetextSubmit(freetextValue)}
+                  className="ghost-btn"
+                  style={{ fontSize: 11, padding: '8px 20px' }}
+                  disabled={!freetextValue.trim()}
+                >
+                  Build My Agenda &rarr;
+                </button>
+                <button
+                  onClick={handleFreetextSkip}
+                  className="ghost-btn ghost-btn--secondary"
+                  style={{ fontSize: 11, padding: '8px 20px' }}
+                >
+                  Skip
+                </button>
+              </div>
+              <div className="mono" style={{ fontSize: 9, color: '#555', marginTop: 10 }}>
+                I'll scan for themes, pain points, speaker interests, and company mentions to fine-tune your recommendations.
+              </div>
             </div>
           )}
 
