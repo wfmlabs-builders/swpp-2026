@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 const links = [
   { to: '/agenda', label: 'Agenda' },
+  { to: '/planner', label: 'Build My Agenda' },
   { to: '/session/adaptive', label: 'My Session' },
   { to: '/about', label: 'About' },
   { to: '/newsletter', label: 'Newsletter' },

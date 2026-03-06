@@ -7,6 +7,7 @@ import Session from './pages/Session';
 import About from './pages/About';
 import Newsletter from './pages/Newsletter';
 import Book from './pages/Book';
+import Planner from './pages/Planner';
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/agenda" element={<Agenda />} />
+          <Route path="/planner" element={<Planner />} />
           <Route path="/session/adaptive" element={<Session />} />
           <Route path="/about" element={<About />} />
           <Route path="/newsletter" element={<Newsletter />} />

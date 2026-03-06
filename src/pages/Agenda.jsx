@@ -536,6 +536,32 @@ export default function Agenda() {
         })}
       </div>
 
+      {/* Build My Agenda CTA */}
+      <div style={{
+        maxWidth: 1280, margin: '0 auto', padding: '24px 40px',
+        display: 'flex', justifyContent: 'center',
+      }}>
+        <Link to="/planner" style={{
+          display: 'flex', alignItems: 'center', gap: 12, padding: '16px 28px',
+          background: 'rgba(201,162,39,0.06)', border: '1px solid rgba(201,162,39,0.2)',
+          borderRadius: 6, textDecoration: 'none', transition: 'all 0.2s',
+        }}>
+          <span style={{
+            width: 28, height: 28, borderRadius: '50%',
+            background: 'rgba(201,162,39,0.15)', border: '1px solid rgba(201,162,39,0.3)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 12, color: '#C9A227',
+          }}>W</span>
+          <div>
+            <div style={{ fontSize: 14, color: '#F0EBE0' }}>Build My Agenda</div>
+            <div className="mono" style={{ fontSize: 10, color: '#888' }}>
+              AI-powered personal schedule builder
+            </div>
+          </div>
+          <span style={{ color: '#C9A227', marginLeft: 8 }}>&rarr;</span>
+        </Link>
+      </div>
+
       {/* Footnote */}
       <div style={{
         maxWidth: 1280,
